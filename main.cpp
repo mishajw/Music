@@ -6,14 +6,16 @@
 using namespace std;
 
 double defaultLength = SAMPLE_RATE;
-unsigned int maxInt = (unsigned int) pow(2, 8);
+unsigned int maxInt = (unsigned int) pow(2, 32);
 
 void sinePlay(double frequency);
 
 int main() {
-    for (double i = 440; i < 5000; i *= 2) {
-        sinePlay(i);
-    }
+//    for (double i = 440; i < 500; i += 10) {
+//        sinePlay(i);
+//    }
+
+    sinePlay(440);
 
     return 0;
 }
@@ -29,9 +31,14 @@ void sinePlay(double frequency) {
 
     for (int i = 0; i < defaultLength; i ++) {
         double scaledSin = (sin(fmod(incred, M_PI)) + 1) / 2;
-        unsigned int toPlay = (unsigned int) (scaledSin * maxInt * 0.5);
+        unsigned int toPlay = (unsigned int) (scaledSin * maxInt * 0.1);
 
-        cout << (uint8_t) toPlay;
+
+
+        cout << (char) ((toPlay >> 24) & 0xFF) <<
+                (char) ((toPlay >> 16) & 0xFF) <<
+                (char) ((toPlay >> 8)  & 0xFF) <<
+                (char) ( toPlay        & 0xFF);
 
         incred += incr;
     }
