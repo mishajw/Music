@@ -30,10 +30,8 @@ void sinePlay(double frequency) {
     cerr << incr * SAMPLE_RATE << endl;
 
     for (int i = 0; i < defaultLength; i ++) {
-        double scaledSin = (sin(fmod(incred, M_PI)) + 1) / 2;
+        double scaledSin = sin(fmod(incred, M_PI));
         unsigned int toPlay = (unsigned int) (scaledSin * maxInt * 0.1);
-
-
 
         cout << (char) ((toPlay >> 24) & 0xFF) <<
                 (char) ((toPlay >> 16) & 0xFF) <<
