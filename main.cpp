@@ -2,7 +2,7 @@
 #include <map>
 #include <math.h>
 
-#define SAMPLE_RATE 8000.0
+#define SAMPLE_RATE 96000.0
 
 using namespace std;
 
