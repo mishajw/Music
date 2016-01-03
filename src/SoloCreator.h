@@ -5,10 +5,15 @@
 #ifndef MUSIC_SOLOCREATOR_H
 #define MUSIC_SOLOCREATOR_H
 
+#include <iostream>
 #include "MusicCreator.h"
 
 class SoloCreator : public MusicCreator {
 public:
+    ~SoloCreator() {
+      std::cout << "Died" << std::endl;
+    }
+protected:
     virtual int getNext();
 };
 

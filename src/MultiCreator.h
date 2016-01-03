@@ -5,12 +5,16 @@
 #ifndef MUSIC_MULTICREATOR_H
 #define MUSIC_MULTICREATOR_H
 
-
+#include <vector>
 #include "MusicCreator.h"
 
-class MultiCreator : MusicCreator {
+class MultiCreator : public MusicCreator {
 public:
+    MultiCreator(std::vector<MusicCreator*> &children);
+    ~MultiCreator();
+private:
     virtual int getNext();
+    std::vector<MusicCreator*> children;
 };
 
 
