@@ -20,7 +20,5 @@ int MultiCreator::getNext() {
 }
 
 MultiCreator::~MultiCreator() {
-  std::cout << "Died multi" << std::endl;
-
-  while(!children.empty()) delete children.back(), children.pop_back();
+//  while(!children.empty()) delete children.back(), children.pop_back();
 }
