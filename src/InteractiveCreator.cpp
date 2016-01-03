@@ -6,7 +6,7 @@
 
 int InteractiveCreator::getNext() {
   if (playing) {
-    return mc.getNext();
+    return mc.getScaledNext();
   } else {
     return 0;
   }

@@ -8,7 +8,7 @@
 
 #include "MusicCreator.h"
 
-class InteractiveCreator : MusicCreator {
+class InteractiveCreator : public MusicCreator {
 
 public:
     InteractiveCreator(MusicCreator& _mc) : mc(_mc) {}
@@ -18,7 +18,7 @@ protected:
 
 private:
     bool playing;
-    MusicCreator mc;
+    MusicCreator& mc;
 };
 
 
