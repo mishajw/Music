@@ -11,6 +11,7 @@ class MusicCreator {
 
     void setVolume(double volume);
     double getVolume();
+    int getTimesCalled();
 
   protected:
     virtual int getNext() = 0;

@@ -20,3 +20,7 @@ void MusicCreator::setVolume(double volume) {
 double MusicCreator::getVolume() {
   return this->volume;
 }
+
+int MusicCreator::getTimesCalled() {
+  return timesCalled;
+}
