@@ -3,3 +3,7 @@
 //
 
 #include "SoloCreator.h"
+
+int SoloCreator::getNext() {
+  return 0;
+}
