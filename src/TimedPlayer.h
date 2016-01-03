@@ -5,9 +5,14 @@
 #ifndef MUSIC_TIMEDPLAYER_H
 #define MUSIC_TIMEDPLAYER_H
 
+#include "MusicCreator.h"
 
 class TimedPlayer {
-
+public:
+  TimedPlayer(MusicCreator& _mc) : mc(_mc) {}
+  void run();
+private:
+  MusicCreator& mc;
 };
 
 

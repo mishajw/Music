@@ -1,26 +1,28 @@
 #include <iostream>
-#include "SoloCreator.h"
 #include "MultiCreator.h"
 #include "SingleFrequency.h"
 #include "Helper.h"
+#include "TimedPlayer.h"
 
 using namespace std;
 
 int main() {
-  SingleFrequency* sc = new SingleFrequency(10);
+  map<string, double> freqs;
+  getFreqs(freqs);
+
+  SingleFrequency sc1(freqs["c"]);
+  SingleFrequency sc2(freqs["e"]);
+  SingleFrequency sc3(freqs["g"]);
 
   vector<MusicCreator*> children;
-  children.push_back(sc);
+  children.push_back(&sc1);
+  children.push_back(&sc2);
+  children.push_back(&sc3);
 
-  MultiCreator* mc = new MultiCreator(children);
+  MultiCreator mc(children);
 
-  for (int i = 0; i < SAMPLE_RATE * 3; i ++) {
-    int toPlay = mc->getScaledNext();
-//    cout << toPlay << endl;
-    printInt(toPlay);
-  }
-
-  delete mc;
+  TimedPlayer tp(mc);
+  tp.run();
 
   return 0;
 }
