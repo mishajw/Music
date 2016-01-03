@@ -15,5 +15,6 @@ const double SAMPLE_RATE = 96000.0;
 void sinePlay(double frequency, int length = (int) SAMPLE_RATE);
 void getFreqs(std::map<std::string, double> &freqs);
 void printInt(int i);
+long getTime();
 
 #endif //MUSIC_HELPER_H

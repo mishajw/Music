@@ -3,6 +3,7 @@
 //
 
 #include "Helper.h"
+#include <chrono>
 
 using namespace std;
 
@@ -37,4 +38,10 @@ void printInt(int i) {
     (char) ((i >> 16) & 0xFF) <<
     (char) ((i >> 8)  & 0xFF) <<
     (char) ( i        & 0xFF);
+}
+
+long getTime() {
+  return
+    std::chrono::system_clock::now().time_since_epoch() /
+    std::chrono::milliseconds(1);
 }
