@@ -18,7 +18,3 @@ int MultiCreator::getNext() {
 
   return total;
 }
-
-MultiCreator::~MultiCreator() {
-//  while(!children.empty()) delete children.back(), children.pop_back();
-}
