@@ -10,16 +10,11 @@ double defaultLength = SAMPLE_RATE * 0.5;
 unsigned int maxInt = (unsigned int) pow(2, 32);
 
 void sinePlay(double frequency);
+void getFreqs(map<string, double> &freqs);
 
 int main() {
   map<string, double> freqs;
-  freqs["a"] = 440.00;
-  freqs["b"] = 493.88;
-  freqs["c"] = 523.25;
-  freqs["d"] = 587.33;
-  freqs["e"] = 659.25;
-  freqs["f"] = 698.46;
-  freqs["g"] = 783.99;
+  getFreqs(freqs);
 
   sinePlay(freqs["a"]);
   sinePlay(freqs["b"]);
@@ -51,4 +46,14 @@ void sinePlay(double frequency) {
 
     incred += incr;
   }
+}
+
+void getFreqs(map<string, double> &freqs) {
+  freqs["a"] = 440.00;
+  freqs["b"] = 493.88;
+  freqs["c"] = 523.25;
+  freqs["d"] = 587.33;
+  freqs["e"] = 659.25;
+  freqs["f"] = 698.46;
+  freqs["g"] = 783.99;
 }
