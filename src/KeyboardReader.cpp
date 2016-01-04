@@ -10,7 +10,15 @@
 
 using namespace std;
 
+void KeyboardReader::runOnThread() {
+  listenThread = thread(&KeyboardReader::run, this);
+
+//  t.join();
+}
+
 void KeyboardReader::run() {
+  cerr << "Starting to listen to keyboard..." << endl;
+
   struct input_event ev[64];
   int fd, size = sizeof (struct input_event);
   string device = "/dev/input/event0";
@@ -39,8 +47,6 @@ void KeyboardReader::handleEvent(input_event &event) {
   int type = event.value;
   int keyCode = event.code;
 
-  cerr << keyCode << endl;
-
   switch (type) {
     case 0:
       pressedKeys.erase(keyCode);
@@ -51,4 +57,12 @@ void KeyboardReader::handleEvent(input_event &event) {
     default:
       break;
   }
+}
+
+bool KeyboardReader::isPressed(int keyCode) {
+  return pressedKeys.find(keyCode) != pressedKeys.end();
+}
+
+KeyboardReader::~KeyboardReader() {
+  listenThread.join();
 }

@@ -8,6 +8,8 @@
 using namespace std;
 
 void TimedPlayer::run() {
+  cerr << "Starting timed player" << endl;
+
   long startTime = getTime();
 
   for (int i = 0; i < SAMPLE_RATE * 10; i ++) {
@@ -17,4 +19,6 @@ void TimedPlayer::run() {
     int toPlay = mc.getScaledNext();
     printInt(toPlay);
   }
+
+  cerr << "Finished timed player" << endl;
 }

@@ -7,16 +7,18 @@
 
 
 #include "MusicCreator.h"
+#include "KeyboardReader.h"
 
 class InteractiveCreator : public MusicCreator {
 
 public:
-    InteractiveCreator(MusicCreator& _mc) : mc(_mc) {}
+    InteractiveCreator(MusicCreator& _mc);
 
 protected:
     virtual int getNext();
 
 private:
+    KeyboardReader kr;
     bool playing;
     MusicCreator& mc;
 };
