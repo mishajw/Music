@@ -22,12 +22,15 @@ void getFreqs(map<string, double> &freqs) {
 }
 
 void printInt(int i, int fd) {
-//  cout <<
-//    (char) ((i >> 24) & 0xFF) <<
-//    (char) ((i >> 16) & 0xFF) <<
-//    (char) ((i >> 8)  & 0xFF) <<
-//    (char) ( i        & 0xFF);
-  write(fd, &i, sizeof(i));
+  char c1 = (char) ((i >> 24) & 0xFF);
+  char c2 = (char) ((i >> 16) & 0xFF);
+  char c3 = (char) ((i >> 8)  & 0xFF);
+  char c4 = (char) ( i        & 0xFF);
+
+  write(fd, &c1, sizeof(c1));
+  write(fd, &c2, sizeof(c2));
+  write(fd, &c3, sizeof(c3));
+  write(fd, &c4, sizeof(c4));
 }
 
 long getTime() {
