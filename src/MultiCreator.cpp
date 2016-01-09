@@ -19,8 +19,14 @@ int MultiCreator::getNext() {
 //  }
 
   for (auto const c : children) {
-    total += c->getScaledNext();
+    total += c->getScaledNext() / children.size();
   }
+
+//  std::cout << total << std::endl;
+//  if (children.size() > 0) {
+//    total /= children.size();
+//  }
+//  std::cout << total << std::endl;
 
   return total;
 }
