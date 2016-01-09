@@ -5,16 +5,30 @@
 #include "MultiCreator.h"
 #include <iostream>
 
-MultiCreator::MultiCreator(std::vector<MusicCreator *> &children) {
+MultiCreator::MultiCreator() {}
+
+MultiCreator::MultiCreator(std::set<MusicCreator *> &children) {
   this->children = children;
 }
 
 int MultiCreator::getNext() {
   int total = 0;
 
-  for (unsigned int i = 0; i < children.size(); i++) {
-    total += children.at(i)->getScaledNext();
+//  for (unsigned int i = 0; i < children.size(); i++) {
+//    total += children.at(i)->getScaledNext();
+//  }
+
+  for (auto const c : children) {
+    total += c->getScaledNext();
   }
 
   return total;
+}
+
+void MultiCreator::addChild(MusicCreator &mc) {
+  children.insert(&mc);
+}
+
+void MultiCreator::removeChild(MusicCreator &mc) {
+  children.erase(&mc);
 }

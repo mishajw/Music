@@ -5,15 +5,18 @@
 #ifndef MUSIC_MULTICREATOR_H
 #define MUSIC_MULTICREATOR_H
 
-#include <vector>
+#include <set>
 #include "MusicCreator.h"
 
 class MultiCreator : public MusicCreator {
 public:
-    MultiCreator(std::vector<MusicCreator*> &children);
+    MultiCreator();
+    MultiCreator(std::set<MusicCreator*> &children);
+    void addChild(MusicCreator &mc);
+    void removeChild(MusicCreator &mc);
 private:
     virtual int getNext();
-    std::vector<MusicCreator*> children;
+    std::set<MusicCreator*> children;
 };
 
 #endif //MUSIC_MULTICREATOR_H
