@@ -8,11 +8,15 @@
 
 #include "MusicCreator.h"
 #include "KeyboardReader.h"
+#include "ChangableFrequency.h"
+#include "MultiCreator.h"
+#include <map>
 
 class InteractiveCreator : public MusicCreator {
 
 public:
-    InteractiveCreator(MusicCreator& _mc);
+    InteractiveCreator();
+    ~InteractiveCreator();
 
 protected:
     virtual int getNext();
@@ -20,7 +24,9 @@ protected:
 private:
     KeyboardReader kr;
     bool playing;
-    MusicCreator& mc;
+    std::map<std::string, double> freqs;
+    std::map<int, MusicCreator*> notes;
+    MultiCreator mc;
 };
 
 
