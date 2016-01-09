@@ -12,13 +12,18 @@
 using namespace std;
 
 void getFreqs(map<string, double> &freqs) {
-  freqs["a"] = 440.00;
-  freqs["b"] = 493.88;
   freqs["c"] = 523.25;
+  freqs["c#"] = 554.37;
   freqs["d"] = 587.33;
+  freqs["d#"] = 622.25;
   freqs["e"] = 659.25;
   freqs["f"] = 698.46;
+  freqs["f#"] = 739.99;
   freqs["g"] = 783.99;
+  freqs["g#"] = 830.61;
+  freqs["a"] = 880.00;
+  freqs["a#"] = 932.33;
+  freqs["b"] = 978.77;
 }
 
 void printInt(int i, int fd) {
