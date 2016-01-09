@@ -10,7 +10,6 @@
 using namespace std;
 
 InteractiveCreator::InteractiveCreator() {
-  kr.runOnThread();
   getFreqs(freqs);
 
   notes[30] = new SingleFrequency(freqs["c"]);
@@ -24,7 +23,7 @@ InteractiveCreator::InteractiveCreator() {
 
 int InteractiveCreator::getNext() {
   for(std::map<int, MusicCreator*>::iterator iter = notes.begin(); iter != notes.end(); ++iter) {
-    if (kr.isPressed(iter->first)) {
+    if (KeyboardReader::isPressed(iter->first)) {
       mc.addChild(*(iter->second));
     } else {
       mc.removeChild(*(iter->second));

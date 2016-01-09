@@ -22,7 +22,6 @@ protected:
     virtual int getNext();
 
 private:
-    KeyboardReader kr;
     bool playing;
     std::map<std::string, double> freqs;
     std::map<int, MusicCreator*> notes;

@@ -11,14 +11,23 @@
 
 class KeyboardReader {
 public:
-    void runOnThread();
-    void run();
-    bool isPressed(int keyCode);
+    static void runOnThread();
+    static void run();
+    static bool isPressed(int keyCode);
     ~KeyboardReader();
+
+    static KeyboardReader& getInstance() {
+      static KeyboardReader instance;
+      return instance;
+    }
+
+    KeyboardReader(KeyboardReader const&) = delete;
+    void operator=(KeyboardReader const&) = delete;
 private:
+    KeyboardReader() {}
     std::thread listenThread;
     std::set<int> pressedKeys;
-    void handleEvent(input_event& event);
+    static void handleEvent(input_event& event);
 };
 
 

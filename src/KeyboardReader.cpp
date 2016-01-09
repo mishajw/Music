@@ -11,9 +11,7 @@
 using namespace std;
 
 void KeyboardReader::runOnThread() {
-  listenThread = thread(&KeyboardReader::run, this);
-
-//  t.join();
+  getInstance().listenThread = thread(&run);
 }
 
 void KeyboardReader::run() {
@@ -49,10 +47,10 @@ void KeyboardReader::handleEvent(input_event &event) {
 
   switch (type) {
     case 0:
-      pressedKeys.erase(keyCode);
+      getInstance().pressedKeys.erase(keyCode);
       break;
     case 1:
-      pressedKeys.insert(keyCode);
+      getInstance().pressedKeys.insert(keyCode);
       break;
     default:
       break;
@@ -60,7 +58,7 @@ void KeyboardReader::handleEvent(input_event &event) {
 }
 
 bool KeyboardReader::isPressed(int keyCode) {
-  return pressedKeys.find(keyCode) != pressedKeys.end();
+  return getInstance().pressedKeys.find(keyCode) != getInstance().pressedKeys.end();
 }
 
 KeyboardReader::~KeyboardReader() {
