@@ -12,7 +12,7 @@ class MusicCreator {
     void setVolume(double volume);
     double getVolume();
     int getTimesCalled();
-
+    virtual void keyPressed(int keyCode, bool pressed) {};
   protected:
     virtual int getNext() = 0;
 
