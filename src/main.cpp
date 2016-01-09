@@ -8,6 +8,8 @@
 using namespace std;
 
 int main() {
+  KeyboardReader::runOnThread();
+
   int fd = setupAplay();
 
   map<string, double> freqs;
@@ -17,17 +19,13 @@ int main() {
   SingleFrequency sc2(freqs["e"]);
   SingleFrequency sc3(freqs["g"]);
 
-  sc1.setVolume(0.3);
-  sc2.setVolume(0.3);
-  sc3.setVolume(0.3);
-
-  vector<MusicCreator*> children;
-  children.push_back(&sc1);
-  children.push_back(&sc2);
-  children.push_back(&sc3);
+  set<MusicCreator*> children;
+  children.insert(&sc1);
+  children.insert(&sc2);
+  children.insert(&sc3);
   MultiCreator mc(children);
 
-  InteractiveCreator ic(mc);
+  InteractiveCreator ic;
 
   TimedPlayer tp(ic, fd);
   tp.run();
