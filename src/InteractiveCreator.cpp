@@ -11,7 +11,6 @@ using namespace std;
 
 InteractiveCreator::InteractiveCreator() {
   getFreqs(freqs);
-
   notes[30] = new SingleFrequency(freqs["c"]);
   notes[31] = new SingleFrequency(freqs["d"]);
   notes[32] = new SingleFrequency(freqs["e"]);
@@ -19,21 +18,21 @@ InteractiveCreator::InteractiveCreator() {
   notes[34] = new SingleFrequency(freqs["g"]);
   notes[35] = new SingleFrequency(freqs["a"]);
   notes[36] = new SingleFrequency(freqs["b"]);
+
+  for (auto const k : notes) {
+    KeyboardReader::registerListener(this, k.first);
+  }
 }
 
 int InteractiveCreator::getNext() {
-  for(std::map<int, MusicCreator*>::iterator iter = notes.begin(); iter != notes.end(); ++iter) {
-    if (KeyboardReader::isPressed(iter->first)) {
-      mc.addChild(*(iter->second));
-    } else {
-      mc.removeChild(*(iter->second));
-    }
-  }
+  return mc.getScaledNext();
+}
 
-  if (playing) {
-    return mc.getScaledNext();
+void InteractiveCreator::keyPressed(int keyCode, bool pressed) {
+  if (pressed) {
+    mc.addChild(*notes[keyCode]);
   } else {
-    return 0;
+    mc.removeChild(*notes[keyCode]);
   }
 }
 

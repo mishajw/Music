@@ -48,9 +48,11 @@ void KeyboardReader::handleEvent(input_event &event) {
   switch (type) {
     case 0:
       getInstance().pressedKeys.erase(keyCode);
+      notifyListeners(keyCode, false);
       break;
     case 1:
       getInstance().pressedKeys.insert(keyCode);
+      notifyListeners(keyCode, true);
       break;
     default:
       break;
@@ -63,4 +65,16 @@ bool KeyboardReader::isPressed(int keyCode) {
 
 KeyboardReader::~KeyboardReader() {
   listenThread.join();
+}
+
+void KeyboardReader::registerListener(MusicCreator *mc, int keyCode) {
+  getInstance().listeners[keyCode].push_back(mc);
+}
+
+void KeyboardReader::notifyListeners(int keyCode, bool pressed) {
+  auto ls = getInstance().listeners[keyCode];
+
+  for (unsigned int i = 0; i < ls.size(); i++) {
+    ls.at(i)->keyPressed(keyCode, pressed);
+  }
 }

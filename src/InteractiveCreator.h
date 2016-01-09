@@ -16,6 +16,7 @@ class InteractiveCreator : public MusicCreator {
 
 public:
     InteractiveCreator();
+    virtual void keyPressed(int keyCode, bool pressed);
     ~InteractiveCreator();
 
 protected:
