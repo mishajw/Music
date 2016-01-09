@@ -9,10 +9,11 @@
 
 class TimedPlayer {
 public:
-  TimedPlayer(MusicCreator& _mc) : mc(_mc) {}
+  TimedPlayer(MusicCreator& _mc, int _fd) : mc(_mc), fd(_fd) {}
   void run();
 private:
   MusicCreator& mc;
+  int fd;
 };
 
 

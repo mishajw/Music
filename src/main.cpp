@@ -3,10 +3,13 @@
 #include "SingleFrequency.h"
 #include "Helper.h"
 #include "TimedPlayer.h"
+#include "InteractiveCreator.h"
 
 using namespace std;
 
 int main() {
+  int fd = setupAplay();
+
   map<string, double> freqs;
   getFreqs(freqs);
 
@@ -14,15 +17,22 @@ int main() {
   SingleFrequency sc2(freqs["e"]);
   SingleFrequency sc3(freqs["g"]);
 
+  sc1.setVolume(0.3);
+  sc2.setVolume(0.3);
+  sc3.setVolume(0.3);
+
   vector<MusicCreator*> children;
   children.push_back(&sc1);
   children.push_back(&sc2);
   children.push_back(&sc3);
-
   MultiCreator mc(children);
 
-  TimedPlayer tp(mc);
+  InteractiveCreator ic(mc);
+
+  TimedPlayer tp(ic, fd);
   tp.run();
+
+  destroyAplay(fd);
 
   return 0;
 }

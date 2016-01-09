@@ -11,10 +11,13 @@
 #include <map>
 
 const double SAMPLE_RATE = 96000.0;
+const std::string fifoName("/tmp/music_fifo");
+const std::string coreAplay("aplay -f S32_BE -r 96000");
 
-void sinePlay(double frequency, int length = (int) SAMPLE_RATE);
 void getFreqs(std::map<std::string, double> &freqs);
-void printInt(int i);
+void printInt(int i, int fd);
 long getTime();
+int setupAplay();
+void destroyAplay(int fd);
 
 #endif //MUSIC_HELPER_H

@@ -4,23 +4,12 @@
 
 #include "Helper.h"
 #include <chrono>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <unistd.h>
+
 
 using namespace std;
-
-void sinePlay(double frequency, int length) {
-  double incr = M_PI / SAMPLE_RATE * frequency;
-  double incred = 0;
-
-  cerr << incr * SAMPLE_RATE << endl;
-
-  for (int i = 0; i < length; i ++) {
-    int toPlay = (int) (sin(fmod(incred, M_PI)) * INT_MAX);
-
-    printInt(toPlay);
-
-    incred += incr;
-  }
-}
 
 void getFreqs(map<string, double> &freqs) {
   freqs["a"] = 440.00;
@@ -32,16 +21,35 @@ void getFreqs(map<string, double> &freqs) {
   freqs["g"] = 783.99;
 }
 
-void printInt(int i) {
-  cout <<
-    (char) ((i >> 24) & 0xFF) <<
-    (char) ((i >> 16) & 0xFF) <<
-    (char) ((i >> 8)  & 0xFF) <<
-    (char) ( i        & 0xFF);
+void printInt(int i, int fd) {
+//  cout <<
+//    (char) ((i >> 24) & 0xFF) <<
+//    (char) ((i >> 16) & 0xFF) <<
+//    (char) ((i >> 8)  & 0xFF) <<
+//    (char) ( i        & 0xFF);
+  write(fd, &i, sizeof(i));
 }
 
 long getTime() {
   return
     std::chrono::system_clock::now().time_since_epoch() /
     std::chrono::milliseconds(1);
+}
+
+int setupAplay() {
+  // Make FIFO to put music output
+  mkfifo(fifoName.c_str(), 0666);
+
+  string aplayCommand;
+  aplayCommand = coreAplay + " " + fifoName + " &";
+
+  // Start aplay
+  system(aplayCommand.c_str());
+
+  return open(fifoName.c_str(), O_WRONLY);
+}
+
+void destroyAplay(int fd) {
+  close(fd);
+  unlink(fifoName.c_str());
 }
