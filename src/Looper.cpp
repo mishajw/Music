@@ -11,10 +11,19 @@ int Looper::getNext() {
   int childNext = child.getScaledNext();
 
   while (history.size() <= index) {
-    history.push_back(0);
+    history.push_back(vector<int>());
   }
 
-  history.at(index) += childNext;
+  vector<int> &current = history.at(index);
 
-  return history.at(index);
+  if (childNext != 0) {
+    current.push_back(childNext);
+  }
+
+  int total = 0;
+  for (unsigned int i = 0; i < current.size(); i++) {
+    total += current.at(i) / current.size();
+  }
+
+  return total;
 }

@@ -16,7 +16,7 @@ public:
 private:
     MusicCreator &child;
     int length;
-    std::vector<int> history;
+    std::vector<std::vector<int>> history;
 };
 
 
