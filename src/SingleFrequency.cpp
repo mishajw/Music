@@ -9,7 +9,7 @@
 
 int SingleFrequency::getNext() {
   double angle = (M_PI / SAMPLE_RATE * frequency) * timesCalled;
-  return (int) (sin(fmod(angle, M_PI)) * INT_MAX);
+  return (int) (waveFunction(fmod(angle, M_PI)) * INT_MAX);
 }
 
 SingleFrequency::SingleFrequency(double frequency, double (*waveFunction)(double)) {
