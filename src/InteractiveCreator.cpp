@@ -9,20 +9,21 @@
 
 using namespace std;
 
-InteractiveCreator::InteractiveCreator() {
+InteractiveCreator::InteractiveCreator(MusicCreator * (*factory)(double)) {
   getFreqs(freqs);
-  notes[30] = new SingleFrequency(freqs["c"]);
-  notes[17] = new SingleFrequency(freqs["c#"]);
-  notes[31] = new SingleFrequency(freqs["d"]);
-  notes[18] = new SingleFrequency(freqs["d#"]);
-  notes[32] = new SingleFrequency(freqs["e"]);
-  notes[33] = new SingleFrequency(freqs["f"]);
-  notes[20] = new SingleFrequency(freqs["f#"]);
-  notes[34] = new SingleFrequency(freqs["g"]);
-  notes[21] = new SingleFrequency(freqs["g#"]);
-  notes[35] = new SingleFrequency(freqs["a"]);
-  notes[22] = new SingleFrequency(freqs["a#"]);
-  notes[36] = new SingleFrequency(freqs["b"]);
+
+  notes[30] = factory(freqs["c"]);
+  notes[17] = factory(freqs["c#"]);
+  notes[31] = factory(freqs["d"]);
+  notes[18] = factory(freqs["d#"]);
+  notes[32] = factory(freqs["e"]);
+  notes[33] = factory(freqs["f"]);
+  notes[20] = factory(freqs["f#"]);
+  notes[34] = factory(freqs["g"]);
+  notes[21] = factory(freqs["g#"]);
+  notes[35] = factory(freqs["a"]);
+  notes[22] = factory(freqs["a#"]);
+  notes[36] = factory(freqs["b"]);
 
   for (auto const k : notes) {
     KeyboardReader::registerListener(this, k.first);
