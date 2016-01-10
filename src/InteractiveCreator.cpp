@@ -42,5 +42,7 @@ void InteractiveCreator::keyPressed(int keyCode, bool pressed) {
 }
 
 InteractiveCreator::~InteractiveCreator() {
-  // todo delete children
+  for (auto const n : notes) {
+    delete n.second;
+  }
 }
