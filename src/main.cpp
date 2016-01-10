@@ -7,6 +7,10 @@
 
 using namespace std;
 
+MusicCreator* factory(double freq) {
+  return new SingleFrequency(freq / 2);
+}
+
 int main() {
   KeyboardReader::runOnThread();
 
@@ -25,7 +29,7 @@ int main() {
   children.insert(&sc3);
   MultiCreator mc(children);
 
-  InteractiveCreator ic;
+  InteractiveCreator ic(factory);
 
   TimedPlayer tp(ic, fd);
   tp.run();
