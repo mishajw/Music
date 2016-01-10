@@ -4,11 +4,12 @@
 #include "Helper.h"
 #include "TimedPlayer.h"
 #include "InteractiveCreator.h"
+#include "WaveFunctions.h"
 
 using namespace std;
 
 MusicCreator* factory(double freq) {
-  return new SingleFrequency(freq / 2);
+  return new SingleFrequency(freq / 2, WaveFunctions::jagged);
 }
 
 int main() {
