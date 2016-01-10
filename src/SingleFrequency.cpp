@@ -12,8 +12,9 @@ int SingleFrequency::getNext() {
   return (int) (sin(fmod(angle, M_PI)) * INT_MAX);
 }
 
-SingleFrequency::SingleFrequency(double frequency) {
+SingleFrequency::SingleFrequency(double frequency, double (*waveFunction)(double)) {
   this->frequency = frequency;
+  this->waveFunction = waveFunction;
 }
 
 double SingleFrequency::getFrequency() {

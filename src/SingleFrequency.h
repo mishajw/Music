@@ -6,16 +6,18 @@
 #define MUSIC_SINGLEFREQUENCY_H
 
 
+#include <math.h>
 #include "MusicCreator.h"
 
 class SingleFrequency : public MusicCreator {
 public:
-    SingleFrequency(double frequency);
+    SingleFrequency(double frequency, double (*)(double) = sin);
     double getFrequency();
 private:
     virtual int getNext();
 
     double frequency;
+    double (*waveFunction)(double);
 };
 
 
