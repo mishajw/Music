@@ -23,7 +23,6 @@ protected:
     virtual int getNext();
 
 private:
-    bool playing;
     std::map<std::string, double> freqs;
     std::map<int, MusicCreator*> notes;
     MultiCreator mc;
