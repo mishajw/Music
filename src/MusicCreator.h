@@ -13,13 +13,14 @@ class MusicCreator {
     double getVolume();
     int getTimesCalled();
     virtual void keyPressed(int keyCode, bool pressed) {};
+    int getLastValue();
   protected:
     virtual int getNext() = 0;
-
     int timesCalled = 0;
 
   private:
     double volume = 1;
+    int lastValue;
 };
 
 #endif //MUSIC_MUSICCREATOR_H

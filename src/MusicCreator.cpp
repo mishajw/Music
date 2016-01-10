@@ -7,7 +7,9 @@
 int MusicCreator::getScaledNext() {
   timesCalled ++;
 
-  return (int) (volume * getNext());
+  int value = (int) (volume * getNext());
+  lastValue = value;
+  return value;
 }
 
 void MusicCreator::setVolume(double volume) {
@@ -15,6 +17,10 @@ void MusicCreator::setVolume(double volume) {
 
   if (this->volume < 0) this->volume = 0;
   if (this->volume > 1) this->volume = 1;
+}
+
+int MusicCreator::getLastValue() {
+  return lastValue;
 }
 
 double MusicCreator::getVolume() {
