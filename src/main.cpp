@@ -5,37 +5,26 @@
 #include "TimedPlayer.h"
 #include "InteractiveCreator.h"
 #include "WaveFunctions.h"
+#include "PitchChanger.h"
+#include "Looper.h"
 
 using namespace std;
 
 MusicCreator* factory(double freq) {
-  return new SingleFrequency(freq / 2, WaveFunctions::jagged);
+  return new SingleFrequency(freq / 2, sin);
 }
 
 int main() {
   KeyboardReader::runOnThread();
-
-  int fd = setupAplay();
-
-  map<string, double> freqs;
-  getFreqs(freqs);
-
-  SingleFrequency sc1(freqs["c"]);
-  SingleFrequency sc2(freqs["e"]);
-  SingleFrequency sc3(freqs["g"]);
-
-  set<MusicCreator*> children;
-  children.insert(&sc1);
-  children.insert(&sc2);
-  children.insert(&sc3);
-  MultiCreator mc(children);
+  Player pl;
 
   InteractiveCreator ic(factory);
 
-  TimedPlayer tp(ic, fd);
-  tp.run();
+  Looper l(ic, 2000);
+  PitchChanger pc(l);
 
-  destroyAplay(fd);
+  TimedPlayer tp(pc, pl);
+  tp.run();
 
   return 0;
 }

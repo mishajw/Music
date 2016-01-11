@@ -26,38 +26,10 @@ void getFreqs(map<string, double> &freqs) {
   freqs["b"] = 978.77;
 }
 
-void printInt(int i, int fd) {
-  char c1 = (char) ((i >> 24) & 0xFF);
-  char c2 = (char) ((i >> 16) & 0xFF);
-  char c3 = (char) ((i >> 8)  & 0xFF);
-  char c4 = (char) ( i        & 0xFF);
 
-  write(fd, &c1, sizeof(c1));
-  write(fd, &c2, sizeof(c2));
-  write(fd, &c3, sizeof(c3));
-  write(fd, &c4, sizeof(c4));
-}
 
 long getTime() {
   return
     std::chrono::system_clock::now().time_since_epoch() /
     std::chrono::milliseconds(1);
-}
-
-int setupAplay() {
-  // Make FIFO to put music output
-  mkfifo(fifoName.c_str(), 0666);
-
-  string aplayCommand;
-  aplayCommand = coreAplay + " " + fifoName + " &";
-
-  // Start aplay
-  system(aplayCommand.c_str());
-
-  return open(fifoName.c_str(), O_WRONLY);
-}
-
-void destroyAplay(int fd) {
-  close(fd);
-  unlink(fifoName.c_str());
 }

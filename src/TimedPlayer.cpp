@@ -17,6 +17,6 @@ void TimedPlayer::run() {
     while ((long) ((((double) getTime() - startTime) / 1000.0) * SAMPLE_RATE) < i);
 
     int toPlay = mc.getScaledNext();
-    printInt(toPlay, fd);
+    pl.playValue(toPlay);
   }
 }
