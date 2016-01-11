@@ -8,15 +8,7 @@
 
 class Player {
 public:
-    Player();
-    ~Player();
-
-    void playValue(int value);
-private:
-    int fd;
-
-    void setupAplay();
-    void destroyAplay();
+    virtual void playValue(int value) {}
 };
 
 

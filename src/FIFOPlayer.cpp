@@ -2,7 +2,7 @@
 // Created by misha on 11/01/16.
 //
 
-#include "Player.h"
+#include "FIFOPlayer.h"
 #include <chrono>
 #include <sys/stat.h>
 #include <fcntl.h>
@@ -11,14 +11,11 @@
 
 using namespace std;
 
-const string fifoName("/tmp/music_fifo");
-const string coreAplay("aplay -f S32_BE -r 96000");
-
-Player::Player() {
+FIFOPlayer::FIFOPlayer() {
   setupAplay();
 }
 
-void Player::playValue(int value) {
+void FIFOPlayer::playValue(int value) {
   char c1 = (char) ((value >> 24) & 0xFF);
   char c2 = (char) ((value >> 16) & 0xFF);
   char c3 = (char) ((value >> 8) & 0xFF);
@@ -30,7 +27,7 @@ void Player::playValue(int value) {
   write(fd, &c4, sizeof(c4));
 }
 
-void Player::setupAplay() {
+void FIFOPlayer::setupAplay() {
   // Make FIFO to put music output
   mkfifo(fifoName.c_str(), 0666);
 
@@ -43,11 +40,11 @@ void Player::setupAplay() {
   fd = open(fifoName.c_str(), O_WRONLY);
 }
 
-void Player::destroyAplay() {
+void FIFOPlayer::destroyAplay() {
   close(fd);
   unlink(fifoName.c_str());
 }
 
-Player::~Player() {
+FIFOPlayer::~FIFOPlayer() {
   destroyAplay();
 }

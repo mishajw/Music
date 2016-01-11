@@ -7,6 +7,7 @@
 #include "WaveFunctions.h"
 #include "PitchChanger.h"
 #include "Looper.h"
+#include "FIFOPlayer.h"
 
 using namespace std;
 
@@ -16,15 +17,17 @@ MusicCreator* factory(double freq) {
 
 int main() {
   KeyboardReader::runOnThread();
-  Player pl;
+  Player* pl = new FIFOPlayer();
 
   InteractiveCreator ic(factory);
 
   Looper l(ic, 2000);
   PitchChanger pc(l);
 
-  TimedPlayer tp(pc, pl);
+  TimedPlayer tp(pc, *pl);
   tp.run();
+
+  delete pl;
 
   return 0;
 }
